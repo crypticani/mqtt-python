@@ -14,7 +14,7 @@ import socket,subprocess
 # MQTT  server details
 # ------------------------------------------------
 #######################################
-broker_addr = "broker.hivemq.com"
+broker_addr = "192.168.101.113"
 broker_port = 1883
 topic_publish_status = "bd/status"
 toipc_publish_result = "bd/result"
@@ -82,6 +82,8 @@ def on_message(client, userdata, msg):
     except Exception as e:
         print(e)
         pass
+
+
 def send(msg,publish_t):
     try:
         publish.single(publish_t, msg, hostname=broker_addr)

@@ -1,6 +1,4 @@
 ##!/usr/bin/env python
-
-
 import paho.mqtt.client as mqtt
 import paho.mqtt.publish as publish
 import random
@@ -15,7 +13,7 @@ import socket,subprocess
 # MQTT  server details
 # ------------------------------------------------
 #######################################
-broker_addr = "broker.hivemq.com"
+broker_addr = "192.168.101.113"
 broker_port = 1883
 topic_publish_status = "bd/status"
 # toipc_publish_result = "bd/listen"
@@ -74,9 +72,9 @@ def on_message(client, userdata, msg):
         pass
     
     
-def send(msg):
+def send(client, msg):
     try:
-        publish.single("user2", msg, hostname=broker_addr)
+        publish.single(client, msg, hostname=broker_addr)
     except Exception as e:
         print(e)
         pass
@@ -85,5 +83,6 @@ run_mqtt()
 print("Welcome to Mqtt-Linux Terminal.")
 while True:
     data = input(":")
-    send(data)
+    client = "user2"
+    send(client,data)
     
