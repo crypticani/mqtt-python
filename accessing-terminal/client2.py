@@ -18,7 +18,7 @@ broker_addr = "broker.hivemq.com"
 broker_port = 1883
 topic_publish_status = "bd/status"
 toipc_publish_result = "bd/result"
-topic_subscribe = "user1"
+topic_subscribe = "user2"
 live_interval = 5
 #######################################
 #---------------------------------------------------

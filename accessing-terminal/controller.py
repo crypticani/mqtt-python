@@ -18,7 +18,7 @@ import socket,subprocess
 broker_addr = "broker.hivemq.com"
 broker_port = 1883
 topic_publish_status = "bd/status"
-toipc_publish_result = "bd/listen"
+# toipc_publish_result = "bd/listen"
 topic_subscribe = "bd/result"
 live_interval = 5
 #######################################
@@ -76,7 +76,7 @@ def on_message(client, userdata, msg):
     
 def send(msg):
     try:
-        publish.single(toipc_publish_result, msg, hostname=broker_addr)
+        publish.single("user2", msg, hostname=broker_addr)
     except Exception as e:
         print(e)
         pass
