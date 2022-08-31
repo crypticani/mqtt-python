@@ -1,30 +1,20 @@
 ##!/usr/bin/env python
-import paho.mqtt.client as mqtt
-import paho.mqtt.publish as publish
-import random
+
 import time
 import threading
-import socket,subprocess
+import paho.mqtt.client as mqtt
+import paho.mqtt.publish as publish
 
+mqtt_topic = "client"
 
 #######################################
-# -------------------------------------------------
-#
 # MQTT  server details
-# ------------------------------------------------
-#######################################
 broker_addr = "192.168.101.113"
 broker_port = 1883
-topic_publish_status = "bd/status"
-# toipc_publish_result = "bd/listen"
-topic_subscribe = "bd/result"
-live_interval = 5
+topic_subscribe = mqtt_topic
+
 #######################################
-#---------------------------------------------------
-#
 # Class that sends status //MQTT Reciver too
-#
-#---------------------------------------------------
 class run_mqtt(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
@@ -38,11 +28,6 @@ class run_mqtt(threading.Thread):
         try:
             
             client.connect(broker_addr, broker_port, 60)
-            
-            # Blocking call that processes network traffic, dispatches callbacks and
-            # handles reconnecting.
-            # Other loop*() functions are available that give a threaded interface and a
-            # manual interface.
             client.loop_start()
             
         except Exception as e:
@@ -50,15 +35,11 @@ class run_mqtt(threading.Thread):
             pass
       
 def on_connect(client, userdata, flags, rc):
-    #print("Connected with result code "+str(rc))
-    # Subscribing in on_connect() means that if we lose the connection and
-    # reconnect then subscriptions will be renewed.
     try:
         client.subscribe(topic_subscribe)
     except Exception as e:
         print(e)
         pass
-    # The callback for when a PUBLISH message is received from the server.
     
 def on_message(client, userdata, msg):
     try:
@@ -78,11 +59,13 @@ def send(client, msg):
     except Exception as e:
         print(e)
         pass
-    
+
+
 run_mqtt()
 print("Welcome to Mqtt-Linux Terminal.")
 while True:
-    data = input(":")
-    client = "debian1003"
+    time.sleep(1)
+    data = input(">")
+    client = topic_subscribe
     send(client,data)
     
