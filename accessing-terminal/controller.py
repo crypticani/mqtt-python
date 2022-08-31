@@ -83,6 +83,6 @@ run_mqtt()
 print("Welcome to Mqtt-Linux Terminal.")
 while True:
     data = input(":")
-    client = "user2"
+    client = "debian1003"
     send(client,data)
     
